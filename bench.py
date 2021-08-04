@@ -20,8 +20,7 @@ def measure(prefs):
     for pref, value in prefs.items():
         profile.DEFAULT_PREFERENCES['frozen'][pref] = value
 
-    binary = FirefoxBinary('/usr/bin/firefox')
-    driver = webdriver.Firefox(firefox_binary=binary, firefox_profile=profile)
+    driver = webdriver.Firefox(firefox_profile=profile)
     driver.get("https://chromium.github.io/octane")
     assert "Octane 2.0" in driver.title
     driver.execute_script("Run()")
