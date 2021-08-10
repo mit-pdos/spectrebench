@@ -38,7 +38,7 @@ def measure(prefs):
 disabled = {}
 
 print("Default:", measure({}))
-for i in range(len(mitigations)):
+for i in reversed(range(len(mitigations))):
     disabled[mitigations[i]] = False
     v = measure(disabled)
     print("{}=False:".format(mitigations[i]), v)
