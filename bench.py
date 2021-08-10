@@ -35,9 +35,12 @@ def measure(prefs):
         driver.quit()
         return text
 
+disabled = {}
+
 print("Default:", measure({}))
 for i in range(len(mitigations)):
-    v = measure({ mitigations[i]: False })
+    disabled[mitigations[i]] = False
+    v = measure(disabled)
     print("{}=False:".format(mitigations[i]), v)
 
 
