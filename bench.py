@@ -33,17 +33,19 @@ def measure(prefs):
         elem = driver.find_element_by_id("main-banner")
         text = elem.text
         driver.quit()
-        return text
+        return int(text[14:])
+
+def measure_batch(prefs, n):
+    v = 0
+    for j in range(n):
+        v = max(v, measure(prefs))
+    return v
 
 disabled = {}
-
-print("Default:", measure({}))
+print("Default:", measure_batch({}, 5))
 for i in reversed(range(len(mitigations))):
     disabled[mitigations[i]] = False
-    v = 0
-    for j in range(5):
-        v = max(v, int(measure(disabled)))
-    print("{}=False:".format(mitigations[i]), v)
+    print("{}=False: {}".format(mitigations[i], measure_batch(disabled, 5)))
 
 
 
