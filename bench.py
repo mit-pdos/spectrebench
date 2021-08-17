@@ -40,7 +40,9 @@ disabled = {}
 print("Default:", measure({}))
 for i in reversed(range(len(mitigations))):
     disabled[mitigations[i]] = False
-    v = measure(disabled)
+    v = 0
+    for j in range(5):
+        v = max(v, int(measure(disabled)))
     print("{}=False:".format(mitigations[i]), v)
 
 
