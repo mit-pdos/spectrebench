@@ -44,7 +44,7 @@ def measure_batch(prefs, n):
 
     return "{:.0f} ({:.1f})".format(np.mean(values), np.std(values))
 
-iterations = 20
+iterations = 100
 
 disabled = {}
 enabled = {}
@@ -52,21 +52,18 @@ for i in range(len(mitigations)):
     disabled[mitigations[i]] = False
     enabled[mitigations[i]] = True
 
-print(disabled)
-print(dict(filter(lambda x: x[0] != "javascript.options.spectre.object_mitigations", disabled.items())))
-
 print("n =", iterations)
 print("No mitigations:", measure_batch(disabled, iterations))
 
-prefs = { x for x in disabled.items() }
+prefs = dict(disabled)
 prefs["javascript.options.spectre.index_masking"] = True
 print("Just index_masking:", measure_batch(prefs, iterations))
 
-prefs =  { x for x in disabled.items() }
+prefs = dict(disabled)
 prefs["javascript.options.spectre.object_mitigations"] = True
 print("Just object_mitigations:", measure_batch(prefs, iterations))
 
-prefs =  { x for x in disabled.items() }
+prefs = dict(disabled)
 prefs["javascript.options.spectre.index_masking"] = True
 prefs["javascript.options.spectre.object_mitigations"] = True
 print("index_masking + object_mitigations:", measure_batch(prefs, iterations))
