@@ -6,6 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import numpy as np
 
 mitigations = [
     "javascript.options.spectre.index_masking",
@@ -36,16 +37,19 @@ def measure(prefs):
         return int(text[14:])
 
 def measure_batch(prefs, n):
-    v = 0
+    values = []
     for j in range(n):
-        v = max(v, measure(prefs))
-    return v
+        v = measure(prefs)
+        values.append(v)
+
+    return "{:.0f} ({:.1f})".format(np.mean(values), np.std(values))
 
 disabled = {}
-print("Default:", measure_batch({}, 5))
+#print("Default:", measure_batch({}, 5))
 for i in reversed(range(len(mitigations))):
     disabled[mitigations[i]] = False
-    print("{}=False: {}".format(mitigations[i], measure_batch(disabled, 5)))
-
-
-
+    #print("{}=False: {}".format(mitigations[i], measure_batch(disabled, 5)))
+print("All mitigations:", measure_batch({}, 5))
+print("No mitigations:", measure_batch(disabled, 5))
+print("Just index_masking:", measure_batch(dict(filter(lambda x: x[0] != "javascript.options.spectre.index_masking", disabled.items())), 5))
+print("Just object_mitigations:", measure_batch(dict(filter(lambda x: x[0] != "javascript.options.spectre.object_mitigations", disabled.items())), 5))
