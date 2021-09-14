@@ -42,7 +42,7 @@ def measure_batch(prefs, n):
         v = measure(prefs)
         values.append(v)
 
-    return "{:.0f} ({:.1f})".format(np.mean(values), np.std(values))
+    return "{:.0f} ({:.0f})".format(np.mean(values), np.std(values))
 
 iterations = 100
 
