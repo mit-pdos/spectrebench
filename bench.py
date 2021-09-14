@@ -52,20 +52,20 @@ for i in range(len(mitigations)):
     disabled[mitigations[i]] = False
     enabled[mitigations[i]] = True
 
-print("n =", iterations)
-print("No mitigations:", measure_batch(disabled, iterations))
+print("n =", iterations, flush=True)
+print("No mitigations:", measure_batch(disabled, iterations), flush=True)
 
 prefs = dict(disabled)
 prefs["javascript.options.spectre.index_masking"] = True
-print("Just index_masking:", measure_batch(prefs, iterations))
+print("Just index_masking:", measure_batch(prefs, iterations), flush=True)
 
 prefs = dict(disabled)
 prefs["javascript.options.spectre.object_mitigations"] = True
-print("Just object_mitigations:", measure_batch(prefs, iterations))
+print("Just object_mitigations:", measure_batch(prefs, iterations), flush=True)
 
 prefs = dict(disabled)
 prefs["javascript.options.spectre.index_masking"] = True
 prefs["javascript.options.spectre.object_mitigations"] = True
-print("index_masking + object_mitigations:", measure_batch(prefs, iterations))
+print("index_masking + object_mitigations:", measure_batch(prefs, iterations), flush=True)
 
-print("All mitigations:", measure_batch(enabled, iterations))
+print("All mitigations:", measure_batch(enabled, iterations), flush=True)
