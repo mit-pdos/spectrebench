@@ -3,7 +3,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
+from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import numpy as np
@@ -21,7 +21,9 @@ def measure(prefs):
     for pref, value in prefs.items():
         profile.DEFAULT_PREFERENCES['frozen'][pref] = value
 
-    driver = webdriver.Firefox(firefox_profile=profile)
+    options = Options()
+    options.headless = True
+    driver = webdriver.Firefox(options=options, firefox_profile=profile)
     driver.get("https://chromium.github.io/octane")
     assert "Octane 2.0" in driver.title
     driver.execute_script("Run()")
@@ -44,7 +46,7 @@ def measure_batch(prefs, n):
 
     return "{:.0f} ({:.0f})".format(np.mean(values), np.std(values))
 
-iterations = 100
+iterations = 1
 
 disabled = {}
 enabled = {}
