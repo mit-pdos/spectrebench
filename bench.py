@@ -46,7 +46,7 @@ def measure_batch(prefs, n):
 
     return "{:.0f} ({:.0f})".format(np.mean(values), np.std(values))
 
-iterations = 1
+iterations = 100
 
 disabled = {}
 enabled = {}
