@@ -6,7 +6,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 import numpy as np
+import sys
 
 mitigations = [
     "javascript.options.spectre.index_masking",
@@ -29,14 +31,18 @@ def measure(prefs):
     driver.execute_script("Run()")
 
     try:
-        element = WebDriverWait(driver, 100).until(
+        element = WebDriverWait(driver, 1000).until(
             EC.text_to_be_present_in_element((By.ID, "main-banner"), "Octane Score:")
         )
-    finally:
-        elem = driver.find_element_by_id("main-banner")
-        text = elem.text
+    except TimeoutException:
         driver.quit()
-        return int(text[14:])
+        print("timeout", flush=True, file=sys.stderr)
+        return measure(prefs)
+
+    elem = driver.find_element_by_id("main-banner")
+    text = elem.text
+    driver.quit()
+    return int(text[14:])
 
 def measure_batch(prefs, n):
     values = []
