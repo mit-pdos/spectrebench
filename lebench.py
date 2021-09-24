@@ -6,7 +6,7 @@ import numpy as np
 import csv
 from statistics import geometric_mean
 
-subprocess.run(['g++', '-O3', '-lpthread', '-o', 'lebench.bin', 'lebench.cc'])
+subprocess.run(['g++', '-O3', '-pthread', '-o', 'lebench.bin', 'lebench.cc'])
 
 def parse_output(stdout):
     reader = csv.reader(stdout.splitlines())
