@@ -26,6 +26,6 @@ for i in range(1000):
     if times is not None:
         means.append(geometric_mean(times))
         interval = 1.96 * 100 * np.std(means) / math.sqrt(len(means)) / np.mean(means)
-        print("n={}: {:.0f} ({:.0f}) ±{:.2f}%".format(len(means), np.mean(means), np.std(means), interval))
+        print("n={}: {:.0f} ({:.0f}) ±{:.2f}%".format(len(means), np.mean(means), np.std(means), interval), flush=True)
         if i >= 10 and interval < 0.1:
             break
