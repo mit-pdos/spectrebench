@@ -65,6 +65,6 @@ Vagrant.configure("2") do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
     apt-get update
-    apt-get install -y python3 python-is-python3 python3-numpy
+    apt-get install -y python3 python-is-python3 python3-numpy g++
   SHELL
 end

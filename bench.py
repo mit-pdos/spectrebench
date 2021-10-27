@@ -67,9 +67,9 @@ prefs = dict(disabled)
 prefs["javascript.options.spectre.index_masking"] = True
 print("Just index_masking:", measure_batch(prefs, iterations), flush=True)
 
-prefs = dict(disabled)
-prefs["javascript.options.spectre.object_mitigations"] = True
-print("Just object_mitigations:", measure_batch(prefs, iterations), flush=True)
+# prefs = dict(disabled)
+# prefs["javascript.options.spectre.object_mitigations"] = True
+# print("Just object_mitigations:", measure_batch(prefs, iterations), flush=True)
 
 prefs = dict(disabled)
 prefs["javascript.options.spectre.index_masking"] = True

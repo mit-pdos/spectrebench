@@ -20,3 +20,9 @@ parsecmgmt -a run -p parsec.swaptions -i native -s "time -p"
 parsec.blackscholes
 parsec.canneal
 parsec.cmake
+
+```bash
+sudo apt-add-repository multiverse
+sudo apt-get install vagrant virtualbox
+sudo usermod -a -G kvm ubuntu
+```
