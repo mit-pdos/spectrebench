@@ -17,12 +17,30 @@ parsecmgmt -a build -p parsec.swaptions
 parsecmgmt -a run -p parsec.swaptions -i native -s "time -p"
 ```
 
-parsec.blackscholes
-parsec.canneal
-parsec.cmake
-
 ```bash
 sudo apt-add-repository multiverse
 sudo apt-get install vagrant virtualbox
 sudo usermod -a -G kvm ubuntu
+```
+
+# PARSEC
+Download the PARSEC benchmarks:
+```bash
+wget http://parsec.cs.princeton.edu/download/2.1/parsec-2.1.tar.gz && \
+wget http://parsec.cs.princeton.edu/download/2.1/binaries/parsec-2.1-amd64-linux.tar.gz && \
+tar -xzf parsec-2.1-amd64-linux.tar.gz && \
+tar -xzf parsec-2.1.tar.gz -C parsec-2.1 --strip-components=1
+mv parsec-2.1/pkgs/apps/facesim/inst/amd64-linux.gcc.pre parsec-2.1/pkgs/apps/facesim/inst/amd64-linux.gcc && \
+mv parsec-2.1/pkgs/apps/swaptions/inst/amd64-linux.gcc.pre parsec-2.1/pkgs/apps/swaptions/inst/amd64-linux.gcc && \
+mv parsec-2.1/pkgs/apps/bodytrack/inst/amd64-linux.gcc.pre parsec-2.1/pkgs/apps/bodytrack/inst/amd64-linux.gcc 
+```
+Then `cd` into the parsec-2.1 directory and run each of them:
+```bash
+./bin/parsecmgmt -a run -p swaptions -i native -s "time -p"
+```
+```bash
+./bin/parsecmgmt -a run -p facesim -i native -s "time -p"
+```
+```bash
+./bin/parsecmgmt -a run -p bodytrack -i native -s "time -p"
 ```
