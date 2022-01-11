@@ -34,13 +34,33 @@ mv parsec-2.1/pkgs/apps/facesim/inst/amd64-linux.gcc.pre parsec-2.1/pkgs/apps/fa
 mv parsec-2.1/pkgs/apps/swaptions/inst/amd64-linux.gcc.pre parsec-2.1/pkgs/apps/swaptions/inst/amd64-linux.gcc && \
 mv parsec-2.1/pkgs/apps/bodytrack/inst/amd64-linux.gcc.pre parsec-2.1/pkgs/apps/bodytrack/inst/amd64-linux.gcc 
 ```
-Then `cd` into the parsec-2.1 directory and run each of them:
+Then `cd` into the parsec-2.1 directory and run this script:
 ```bash
-./bin/parsecmgmt -a run -p swaptions -i native -s "time -p"
+#!/bin/bash
+
+export EXP="auto"
+
+./bin/parsecmgmt -a run -p facesim -i native -s "time -p" > ${EXP}.facesim.0
+./bin/parsecmgmt -a run -p facesim -i native -s "time -p" > ${EXP}.facesim.1
+./bin/parsecmgmt -a run -p facesim -i native -s "time -p" > ${EXP}.facesim.2
+
+./bin/parsecmgmt -a run -p bodytrack -i native -s "time -p" > ${EXP}.bodytrack.0
+./bin/parsecmgmt -a run -p bodytrack -i native -s "time -p" > ${EXP}.bodytrack.1
+./bin/parsecmgmt -a run -p bodytrack -i native -s "time -p" > ${EXP}.bodytrack.2
+
+./bin/parsecmgmt -a run -p swaptions -i native -s "time -p" > ${EXP}.swaptions.0
+./bin/parsecmgmt -a run -p swaptions -i native -s "time -p" > ${EXP}.swaptions.1
+./bin/parsecmgmt -a run -p swaptions -i native -s "time -p" > ${EXP}.swaptions.2
 ```
-```bash
-./bin/parsecmgmt -a run -p facesim -i native -s "time -p"
+
+# VM Benchmarks
+
 ```
-```bash
-./bin/parsecmgmt -a run -p bodytrack -i native -s "time -p"
+qemu-img create -f raw /tmp/disk1.img 100M
 ```
+
+
+# Linux Command Line Options
+
+`mitigations=auto`, `mitigations=off`, `nospec_store_bypass_disable`
+
