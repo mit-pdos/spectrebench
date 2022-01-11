@@ -96,7 +96,8 @@ int main(int argc, char *argv[])
       break;
   }
 
-  printf("%d files per %ld usec\n", i, end-start);
+  //printf("%d files per %ld usec\n", i, end-start);
+  printf("%f\n", (float)i * 1.0e6 / (float)(end-start));
 
   printstats(0);
 }
