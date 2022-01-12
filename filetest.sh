@@ -1,6 +1,7 @@
 #!/bin/bash
 
 export VAGRANT_EXPERIMENTAL="disks"
+export EXP="auto"
 
 qemu-img create -f raw /tmp/disk1.img 100M
 
@@ -12,10 +13,10 @@ mkdir -p results
 
 for i in {0..499}
 do
-  vagrant ssh -- "mkdir -p /tmp/testdir && rm -r /tmp/testdir/*; /browserbench/smallfile /tmp/testdir" > results/smallfile.${i} 2> /dev/null
+  vagrant ssh -- "mkdir -p /tmp/testdir && rm -r /tmp/testdir/*; /browserbench/smallfile /tmp/testdir" > results/smallfile.${EXP}.${i} 2> /dev/null
 done
 
 for i in {0..499}
 do
-   vagrant ssh -- "mkdir -p /tmp/testdir && rm -r /tmp/testdir/*; /browserbench/largefile /tmp/testdir" > results/largefile.${i} 2> /dev/null
+   vagrant ssh -- "mkdir -p /tmp/testdir && rm -r /tmp/testdir/*; /browserbench/largefile /tmp/testdir" > results/largefile.${EXP}.${i} 2> /dev/null
 done
