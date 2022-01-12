@@ -2,6 +2,7 @@
 
 import sys
 import numpy as np
+import math
 
 values = []
 for name in sys.argv[1:]:
@@ -12,4 +13,6 @@ for name in sys.argv[1:]:
 
 values = np.array(values).transpose()
 for v in values:
-    print("{} ({})".format(np.mean(v), np.std(v)))
+    interval = 1.96 * 100 * np.std(v) / math.sqrt(len(v)) / np.mean(v)
+
+    print("n={}: {:.3g} ({:.3g}) ±{:.2f}%".format(len(v), np.mean(v), np.std(v), interval))
