@@ -18,5 +18,5 @@ done
 
 for i in {0..499}
 do
-   vagrant ssh -- "mkdir -p /mnt/testdir && rm -r /mnt/testdir/*; /browserbench/largefile /mnt/testdir" > results/largefile.${EXP}.${i} 2> /dev/null
+   vagrant ssh -- "sudo mkdir -p /mnt/testdir && sudo rm -r /mnt/testdir/*; sudo /browserbench/largefile /mnt/testdir" > results/largefile.${EXP}.${i} 2> /dev/null
 done
